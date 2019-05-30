@@ -1,4 +1,4 @@
-package main;
+package org.doomsdayrs.api.novelreaderCore.main;
 
 import okhttp3.ResponseBody;
 import org.jsoup.Jsoup;
@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 /**
- * main
+ * org.doomsdayrs.api.novelreaderCore.main
  * 29 / May / 2019
  *
  * @author github.com/doomsdayrs

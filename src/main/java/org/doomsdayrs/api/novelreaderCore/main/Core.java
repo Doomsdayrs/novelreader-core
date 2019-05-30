@@ -1,4 +1,4 @@
-package main;
+package org.doomsdayrs.api.novelreaderCore.main;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * main
+ * org.doomsdayrs.api.novelreaderCore.main
  * 29 / May / 2019
  *
  * @author github.com/doomsdayrs

@@ -1,11 +1,11 @@
-package main;
+package org.doomsdayrs.api.novelreaderCore.main;
 
 import okhttp3.ResponseBody;
 
 import java.util.ArrayList;
 
 /**
- * main
+ * org.doomsdayrs.api.novelreaderCore.main
  * 29 / May / 2019
  *
  * @author github.com/doomsdayrs
@@ -21,6 +21,11 @@ public interface ScrapeFormat {
     String getNovelPassage(ResponseBody responseBody);
 
 
+    /**
+     * If there is a latest page, use this to return a certain page. Starts at 1 onwards
+     * @param page page number
+     * @return string URL of the next latest page
+     */
     String getLatestURL(int page);
 
     /**
