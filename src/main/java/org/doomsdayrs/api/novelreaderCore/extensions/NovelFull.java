@@ -49,6 +49,9 @@ public class NovelFull extends ScrapeFormat {
         super(builder, client);
     }
 
+
+    // Overriding methods
+
     public boolean isIncrementingChapterList() {
         return true;
     }
