@@ -1,4 +1,4 @@
-package org.doomsdayrs.api.novelreaderCore.types;
+package com.github.Doomsdayrs.api.novelreaderCore.types;
 
 import java.util.Arrays;
 import java.util.List;

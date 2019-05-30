@@ -1,4 +1,11 @@
-package org.doomsdayrs.api.novelreaderCore.types;
+package com.github.Doomsdayrs.api.novelreaderCore.main;
+
+import com.github.Doomsdayrs.api.novelreaderCore.types.Formatter;
+import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
+import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * This file is part of novelreader-core.
@@ -18,17 +25,15 @@ package org.doomsdayrs.api.novelreaderCore.types;
  *
  * @author github.com/doomsdayrs
  */
-public class Novel {
-    @Override
-    public String toString() {
-        return "Novel{" +
-                "title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", imageURL='" + imageURL + '\'' +
-                '}';
-    }
+class Core {
 
-    public String title;
-    public String link;
-    public String imageURL;
+
+    public static void main(String[] args) throws IOException {
+        Formatter scrapeFormat = DefaultScrapers.NOVELFULL;
+        String url = scrapeFormat.getLatestURL(1);
+        List<Novel> novels = scrapeFormat.parseLatest(url);
+        NovelPage novelPage = scrapeFormat.parseNovel(novels.get(0).link);
+        String passage = scrapeFormat.getNovelPassage(novelPage.novelChapters.get(0).link);
+        System.out.println(passage);
+    }
 }

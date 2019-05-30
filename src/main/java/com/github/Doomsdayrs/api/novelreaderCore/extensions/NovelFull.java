@@ -1,11 +1,11 @@
-package org.doomsdayrs.api.novelreaderCore.extensions;
+package com.github.Doomsdayrs.api.novelreaderCore.extensions;
 
+import com.github.Doomsdayrs.api.novelreaderCore.types.NovelChapter;
+import com.github.Doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import org.doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
-import org.doomsdayrs.api.novelreaderCore.types.Novel;
-import org.doomsdayrs.api.novelreaderCore.types.NovelChapter;
-import org.doomsdayrs.api.novelreaderCore.types.NovelPage;
+import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
+import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

@@ -1,12 +1,13 @@
-package org.doomsdayrs.api.novelreaderCore.extensions;
+package com.github.Doomsdayrs.api.novelreaderCore.main;
 
-import org.doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
-import org.doomsdayrs.api.novelreaderCore.types.Novel;
-import org.doomsdayrs.api.novelreaderCore.types.NovelPage;
+import com.github.Doomsdayrs.api.novelreaderCore.extensions.NovelFull;
+import com.github.Doomsdayrs.api.novelreaderCore.types.Formatter;
+import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
+import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
 
 import java.io.IOException;
 import java.util.List;
-//TODO, complete this
+
 /**
  * This file is part of novelreader-core.
  * novelreader-core is free software: you can redistribute it and/or modify
@@ -25,33 +26,35 @@ import java.util.List;
  *
  * @author github.com/doomsdayrs
  */
-@Deprecated
-public class KissNovel extends ScrapeFormat {
-    private final String baseURL = "https://kiss-novel.com";
+public enum DefaultScrapers implements Formatter {
+    NOVELFULL(new NovelFull());
 
-
-
-    public boolean isIncrementingChapterList() {
-        return false;
+    private final Formatter formatter;
+    DefaultScrapers(Formatter formatter){
+        this.formatter = formatter;
     }
 
-    public String getNovelPassage(String responseBody) throws IOException {
-        return null;
+    public boolean isIncrementingChapterList() {
+        return formatter.isIncrementingChapterList();
+    }
+
+    public String getNovelPassage(String URL) throws IOException {
+        return formatter.getNovelPassage(URL);
     }
 
     public NovelPage parseNovel(String URL) throws IOException {
-        return null;
+        return formatter.parseNovel(URL);
     }
 
     public NovelPage parseNovel(String URL, int increment) throws IOException {
-        return null;
+        return formatter.parseNovel(URL,increment);
     }
 
     public String getLatestURL(int page) {
-        return baseURL + "/list/"+page;
+        return formatter.getLatestURL(page);
     }
 
-    public List<Novel> parseLatest(String responseBody) throws IOException {
-        return null;
+    public List<Novel> parseLatest(String URL) throws IOException {
+        return formatter.parseLatest(URL);
     }
 }

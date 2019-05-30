@@ -1,10 +1,8 @@
-package org.doomsdayrs.api.novelreaderCore.types;
+package com.github.Doomsdayrs.api.novelreaderCore.types;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
-import org.doomsdayrs.api.novelreaderCore.types.Novel;
-import org.doomsdayrs.api.novelreaderCore.types.NovelPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
