@@ -50,8 +50,8 @@ public interface Formatter {
      *
      * @param URL       Incoming Novel page URL to parse
      * @param increment What increment to use
-     * @return
-     * @throws IOException
+     * @return NovelPage of parsed chapters
+     * @throws IOException If any error occurs
      */
     NovelPage parseNovel(String URL, int increment) throws IOException;
 
@@ -68,4 +68,13 @@ public interface Formatter {
      * @return List of novels listed
      */
     List<Novel> parseLatest(String URL) throws IOException;
+
+    /**
+     * @param query query string to be searched for
+     * @return List of novels listed
+     */
+    List<Novel> search(String query) throws IOException;
+
+    //TODO, Ability to have filters, not just queries
+
 }

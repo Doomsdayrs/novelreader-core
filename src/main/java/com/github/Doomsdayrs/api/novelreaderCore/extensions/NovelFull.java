@@ -1,11 +1,11 @@
 package com.github.Doomsdayrs.api.novelreaderCore.extensions;
 
+import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
 import com.github.Doomsdayrs.api.novelreaderCore.types.NovelChapter;
+import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
 import com.github.Doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
-import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * This file is part of novelreader-core.
  * novelreader-core is free software: you can redistribute it and/or modify
@@ -50,6 +51,29 @@ public class NovelFull extends ScrapeFormat {
     }
 
 
+    private void stripListing(Elements data, Novel novel) {
+        for (int y = 0; y < data.size(); y++) {
+            Element coloum = data.get(y);
+            switch (y) {
+                case 0: {
+                    Element image = coloum.selectFirst("img");
+                    if (image != null)
+                        novel.imageURL = baseURL + image.attr("src");
+                }
+                case 1: {
+                    Element header = coloum.selectFirst("h3");
+                    if (header != null) {
+                        Element titleLink = header.selectFirst("a");
+                        novel.title = titleLink.attr("title");
+                        novel.link = baseURL + titleLink.attr("href");
+                    }
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
     // Overriding methods
 
     public boolean isIncrementingChapterList() {
@@ -60,7 +84,7 @@ public class NovelFull extends ScrapeFormat {
         Document document = docFromURL(URL);
         Elements paragraphs = document.select("div.chapter-c").select("p");
         StringBuilder stringBuilder = new StringBuilder();
-        for(Element element:paragraphs)
+        for (Element element : paragraphs)
             stringBuilder.append(element.text()).append("\n");
 
         return stringBuilder.toString();
@@ -90,24 +114,24 @@ public class NovelFull extends ScrapeFormat {
 
         //Formats the chapters
         {
-            List<NovelChapter> novelChapters = new ArrayList<NovelChapter>();
+            List<NovelChapter> novelChapters = new ArrayList<>();
             Elements lists = document.select("ul.list-chapter");
-            for (Element list:lists){
+            for (Element list : lists) {
                 Elements chapters = list.select("li");
-                for (Element chapter:chapters){
+                for (Element chapter : chapters) {
                     NovelChapter novelChapter = new NovelChapter();
                     Element chapterData = chapter.selectFirst("a");
                     String link = chapterData.attr("href");
-                    if (link!=null)
-                        novelChapter.link = baseURL+link;
+                    if (link != null)
+                        novelChapter.link = baseURL + link;
                     String unformattedNum = chapterData.attr("title");
-                    unformattedNum = unformattedNum.replace("Chapter ","");
-                    if (unformattedNum.contains(":")){
-                        unformattedNum = unformattedNum.substring(0,unformattedNum.indexOf(":"));
+                    unformattedNum = unformattedNum.replace("Chapter ", "");
+                    if (unformattedNum.contains(":")) {
+                        unformattedNum = unformattedNum.substring(0, unformattedNum.indexOf(":"));
                     }
                     novelChapter.chapterNum = Integer.parseInt(unformattedNum);
 
-                    if (novelChapter.chapterNum != -99 && !novelChapter.link.contains("null")){
+                    if (novelChapter.chapterNum != -99 && !novelChapter.link.contains("null")) {
                         novelChapters.add(novelChapter);
                     }
                 }
@@ -125,7 +149,7 @@ public class NovelFull extends ScrapeFormat {
     }
 
     public List<Novel> parseLatest(String URL) throws IOException {
-        List<Novel> novels = new ArrayList<Novel>();
+        List<Novel> novels = new ArrayList<>();
         Document document = docFromURL(URL);
         Elements divMAIN = document.select("div.container");
         for (Element element : divMAIN) {
@@ -133,30 +157,11 @@ public class NovelFull extends ScrapeFormat {
                 Element list = element.selectFirst("div");
                 Elements releases = list.select("div.row");
                 //For each novel
-                for (int x = 0; x < releases.size(); x++) {
+                for (Element release : releases) {
                     Novel novel = new Novel();
-                    Elements data = releases.get(x).select("div");
+                    Elements data = release.select("div");
                     //For each coloum
-                    for (int y = 0; y < data.size(); y++) {
-                        Element coloum = data.get(y);
-                        switch (y) {
-                            case 0: {
-                                Element image = coloum.selectFirst("img");
-                                if (image != null)
-                                    novel.imageURL = baseURL + image.attr("src");
-                            }
-                            case 1: {
-                                Element header = coloum.selectFirst("h3");
-                                if (header != null) {
-                                    Element titleLink = header.selectFirst("a");
-                                    novel.title = titleLink.attr("title");
-                                    novel.link = baseURL + titleLink.attr("href");
-                                }
-                            }
-                            default:
-                                break;
-                        }
-                    }
+                    this.stripListing(data, novel);
                     if (novel.link != null && novel.title != null)
                         novels.add(novel);
                 }
@@ -164,4 +169,24 @@ public class NovelFull extends ScrapeFormat {
         }
         return novels;
     }
+
+    @Override
+    public List<Novel> search(String query) throws IOException {
+        List<Novel> novels = new ArrayList<>();
+        Document document = docFromURL(baseURL + "/search?keyword=" + query.replaceAll(" ", "%20"));
+        Elements listP = document.select("div.container");
+        for (Element list : listP)
+            if (list.id().equals("list-page")) {
+                Elements queries = list.select("div.row");
+                for (Element q : queries) {
+                    Novel novel = new Novel();
+                    this.stripListing(q.select("div"), novel);
+                    if (novel.link != null && novel.title != null)
+                        novels.add(novel);
+                }
+            }
+        return novels;
+    }
+
+
 }

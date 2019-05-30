@@ -30,10 +30,11 @@ class Core {
 
     public static void main(String[] args) throws IOException {
         Formatter scrapeFormat = DefaultScrapers.NOVELFULL;
-        String url = scrapeFormat.getLatestURL(1);
-        List<Novel> novels = scrapeFormat.parseLatest(url);
+
+        List<Novel> novels = scrapeFormat.search("level");
         NovelPage novelPage = scrapeFormat.parseNovel(novels.get(0).link);
         String passage = scrapeFormat.getNovelPassage(novelPage.novelChapters.get(0).link);
+
         System.out.println(passage);
     }
 }

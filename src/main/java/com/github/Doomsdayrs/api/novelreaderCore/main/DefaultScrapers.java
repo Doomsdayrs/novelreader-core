@@ -57,4 +57,9 @@ public enum DefaultScrapers implements Formatter {
     public List<Novel> parseLatest(String URL) throws IOException {
         return formatter.parseLatest(URL);
     }
+
+    @Override
+    public List<Novel> search(String query) throws IOException {
+        return formatter.search(query);
+    }
 }

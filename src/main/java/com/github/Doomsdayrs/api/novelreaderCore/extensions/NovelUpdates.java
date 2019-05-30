@@ -1,10 +1,10 @@
 package com.github.Doomsdayrs.api.novelreaderCore.extensions;
 
+import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
+import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
 import com.github.Doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
-import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -70,7 +70,7 @@ public class NovelUpdates extends ScrapeFormat {
         return null;
     }
 
-    public NovelPage parseNovel(String responseBody, int increment) throws IOException {
+    public NovelPage parseNovel(String responseBody, int increment) {
         return null;
     }
 
@@ -81,7 +81,7 @@ public class NovelUpdates extends ScrapeFormat {
     }
 
     public List<Novel> parseLatest(String URL) throws IOException {
-        List<Novel> novels = new ArrayList<Novel>();
+        List<Novel> novels = new ArrayList<>();
         Document document = docFromURL(URL);
         Elements elements = document.select("table");
         for (int y = 0; y < elements.size(); y++) {
@@ -112,5 +112,10 @@ public class NovelUpdates extends ScrapeFormat {
             }
         }
         return novels;
+    }
+
+    @Override
+    public List<Novel> search(String query) {
+        return null;
     }
 }

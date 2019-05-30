@@ -31,8 +31,8 @@ import java.util.List;
  */
 public abstract class ScrapeFormat implements Formatter {
 
-    Request.Builder builder;
-    OkHttpClient client;
+    private Request.Builder builder;
+    private OkHttpClient client;
 
     public ScrapeFormat() {
         this.builder = new Request.Builder();
@@ -80,4 +80,6 @@ public abstract class ScrapeFormat implements Formatter {
     public abstract String getLatestURL(int page);
 
     public abstract List<Novel> parseLatest(String URL) throws IOException;
+
+    public abstract List<Novel> search(String query) throws IOException;
 }

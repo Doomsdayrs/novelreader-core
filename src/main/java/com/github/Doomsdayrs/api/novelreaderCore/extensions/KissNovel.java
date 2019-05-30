@@ -1,10 +1,9 @@
 package com.github.Doomsdayrs.api.novelreaderCore.extensions;
 
-import com.github.Doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
 import com.github.Doomsdayrs.api.novelreaderCore.types.Novel;
 import com.github.Doomsdayrs.api.novelreaderCore.types.NovelPage;
+import com.github.Doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
 
-import java.io.IOException;
 import java.util.List;
 //TODO, complete this
 /**
@@ -35,15 +34,15 @@ public class KissNovel extends ScrapeFormat {
         return false;
     }
 
-    public String getNovelPassage(String responseBody) throws IOException {
+    public String getNovelPassage(String responseBody) {
         return null;
     }
 
-    public NovelPage parseNovel(String URL) throws IOException {
+    public NovelPage parseNovel(String URL) {
         return null;
     }
 
-    public NovelPage parseNovel(String URL, int increment) throws IOException {
+    public NovelPage parseNovel(String URL, int increment) {
         return null;
     }
 
@@ -51,7 +50,12 @@ public class KissNovel extends ScrapeFormat {
         return baseURL + "/list/"+page;
     }
 
-    public List<Novel> parseLatest(String responseBody) throws IOException {
+    public List<Novel> parseLatest(String responseBody) {
+        return null;
+    }
+
+    @Override
+    public List<Novel> search(String query) {
         return null;
     }
 }

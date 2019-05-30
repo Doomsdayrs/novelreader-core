@@ -32,5 +32,5 @@ class Example{
 ```
 
 ## In Development
-- [ ] Search functionality
-- [ ] More sites
+- [X] Search functionality
+- [ ] More sites(Aim is 10 popular ones)
