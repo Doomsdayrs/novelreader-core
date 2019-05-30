@@ -1,14 +1,7 @@
-package org.doomsdayrs.api.novelreaderCore.main;
-
-import okhttp3.ResponseBody;
-import org.doomsdayrs.api.novelreaderCore.other.Novel;
-import org.doomsdayrs.api.novelreaderCore.other.NovelChapter;
-import org.doomsdayrs.api.novelreaderCore.other.NovelPage;
+package org.doomsdayrs.api.novelreaderCore.types;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * This file is part of novelreader-core.
@@ -24,37 +17,55 @@ import java.util.List;
  * along with novelreader-core.  If not, see <https://www.gnu.org/licenses/>.
  * ====================================================================
  * novelreader-core
- * 29 / May / 2019
+ * 30 / May / 2019
  *
  * @author github.com/doomsdayrs
  */
-public interface ScrapeFormat {
+public interface Formatter {
+    /**
+     * Returns true if the chapter list on the page requires another reload
+     *
+     * @return true if the above matches
+     */
+    boolean isIncrementingChapterList();
 
     /**
      * Parse the novel Chapter
-     * @param responseBody Incoming Novel chapter to parse
+     *
+     * @param URL Incoming Novel chapter URL to parse
      * @return The Passage of the novel
      */
-    String getNovelPassage(ResponseBody responseBody) throws IOException;
+    String getNovelPassage(String URL) throws IOException;
 
     /**
      * Parse the novelPage
-     * @param responseBody Incoming Novel page to parse
+     *
+     * @param URL Incoming Novel page URL to parse
      * @return NovelPage object with as many parameters filled as possible;
      */
-    NovelPage parseNovel(ResponseBody responseBody) throws IOException;
+    NovelPage parseNovel(String URL) throws IOException;
+
+    /**
+     * the above, except if isIncrementingChapterList() returns true this will be used in its stead
+     *
+     * @param URL       Incoming Novel page URL to parse
+     * @param increment What increment to use
+     * @return
+     * @throws IOException
+     */
+    NovelPage parseNovel(String URL, int increment) throws IOException;
 
     /**
      * If there is a latest page, use this to return a certain page. Starts at 1 onwards
+     *
      * @param page page number
      * @return string URL of the next latest page
      */
     String getLatestURL(int page);
 
     /**
-     *
-     * @param responseBody LatestPage to be parsed for novels
+     * @param URL LatestPage URL to be parsed for novels
      * @return List of novels listed
      */
-    List<Novel> parseLatest(ResponseBody responseBody) throws IOException;
+    List<Novel> parseLatest(String URL) throws IOException;
 }

@@ -5,9 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.doomsdayrs.api.novelreader-core</groupId>
-    <artifactId>inital</artifactId>
+    <artifactId>novereader-core</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+
+
+
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>

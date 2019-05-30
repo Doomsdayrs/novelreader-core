@@ -1,5 +1,4 @@
-package org.doomsdayrs.api.novelreaderCore.other;
-
+package org.doomsdayrs.api.novelreaderCore.types;
 
 /**
  * This file is part of novelreader-core.
@@ -19,8 +18,17 @@ package org.doomsdayrs.api.novelreaderCore.other;
  *
  * @author github.com/doomsdayrs
  */
-public class NovelChapter {
-    public String release;
-    public int chapterNum;
+public class Novel {
+    @Override
+    public String toString() {
+        return "Novel{" +
+                "title='" + title + '\'' +
+                ", link='" + link + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                '}';
+    }
+
+    public String title;
     public String link;
+    public String imageURL;
 }

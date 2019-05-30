@@ -1,9 +1,8 @@
 package org.doomsdayrs.api.novelreaderCore.main;
 
-import org.doomsdayrs.api.novelreaderCore.types.Formatter;
-import org.doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
-import org.doomsdayrs.api.novelreaderCore.types.Novel;
 import org.doomsdayrs.api.novelreaderCore.extensions.NovelFull;
+import org.doomsdayrs.api.novelreaderCore.types.Formatter;
+import org.doomsdayrs.api.novelreaderCore.types.Novel;
 import org.doomsdayrs.api.novelreaderCore.types.NovelPage;
 
 import java.io.IOException;
@@ -23,19 +22,39 @@ import java.util.List;
  * along with novelreader-core.  If not, see <https://www.gnu.org/licenses/>.
  * ====================================================================
  * novelreader-core
- * 29 / May / 2019
+ * 30 / May / 2019
  *
  * @author github.com/doomsdayrs
  */
-class Core {
+public enum DefaultScrapers implements Formatter {
+    NOVELFULL(new NovelFull());
 
+    private final Formatter formatter;
+    DefaultScrapers(Formatter formatter){
+        this.formatter = formatter;
+    }
 
-    public static void main(String[] args) throws IOException {
-        Formatter scrapeFormat = DefaultScrapers.NOVELFULL;
-        String url = scrapeFormat.getLatestURL(1);
-        List<Novel> novels = scrapeFormat.parseLatest(url);
-        NovelPage novelPage = scrapeFormat.parseNovel(novels.get(0).link);
-        String passage = scrapeFormat.getNovelPassage(novelPage.novelChapters.get(0).link);
-        System.out.println(passage);
+    public boolean isIncrementingChapterList() {
+        return formatter.isIncrementingChapterList();
+    }
+
+    public String getNovelPassage(String URL) throws IOException {
+        return formatter.getNovelPassage(URL);
+    }
+
+    public NovelPage parseNovel(String URL) throws IOException {
+        return formatter.parseNovel(URL);
+    }
+
+    public NovelPage parseNovel(String URL, int increment) throws IOException {
+        return formatter.parseNovel(URL,increment);
+    }
+
+    public String getLatestURL(int page) {
+        return formatter.getLatestURL(page);
+    }
+
+    public List<Novel> parseLatest(String URL) throws IOException {
+        return formatter.parseLatest(URL);
     }
 }

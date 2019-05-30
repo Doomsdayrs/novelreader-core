@@ -1,7 +1,7 @@
-package org.doomsdayrs.api.novelreaderCore.other;
-
+package org.doomsdayrs.api.novelreaderCore.types;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * This file is part of novelreader-core.
@@ -17,21 +17,40 @@ import java.util.Arrays;
  * along with novelreader-core.  If not, see <https://www.gnu.org/licenses/>.
  * ====================================================================
  * novelreader-core
- * 29 / May / 2019
+ * 30 / May / 2019
  *
  * @author github.com/doomsdayrs
  */
-public class Novel {
+public class NovelPage {
+    public String title;
+    public String imageURL;
+    public String description;
+    public String[] genres;
+    public String[] authors;
+    public Stati status;
+
+
+    public String[] tags;
+    public String[] artists;
+    public String language;
+
+
+    public List<NovelChapter> novelChapters;
+
+
     @Override
     public String toString() {
-        return "Novel{" +
+        return "NovelPage{" +
                 "title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", group=" + Arrays.toString(group) +
+                ", imageURL='" + imageURL + '\'' +
+                ", description='" + description + '\'' +
+                ", genres=" + Arrays.toString(genres) +
+                ", authors=" + Arrays.toString(authors) +
+                ", status=" + status +
+                ", tags=" + Arrays.toString(tags) +
+                ", artists=" + Arrays.toString(artists) +
+                ", language='" + language + '\'' +
+                ", novelChapters=" + novelChapters +
                 '}';
     }
-
-    public String title;
-    public String link;
-    public String[] group;
 }

@@ -1,9 +1,10 @@
-package org.doomsdayrs.api.novelreaderCore.main;
+package org.doomsdayrs.api.novelreaderCore.extensions;
 
-import okhttp3.ResponseBody;
-import org.doomsdayrs.api.novelreaderCore.other.Novel;
-import org.doomsdayrs.api.novelreaderCore.other.NovelPage;
-import org.jsoup.Jsoup;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import org.doomsdayrs.api.novelreaderCore.types.ScrapeFormat;
+import org.doomsdayrs.api.novelreaderCore.types.Novel;
+import org.doomsdayrs.api.novelreaderCore.types.NovelPage;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -31,21 +32,45 @@ import java.util.List;
  *
  * @author github.com/doomsdayrs
  */
-public class NovelUpdates implements ScrapeFormat {
-    private String baseURL = "https://www.novelupdates.com";
+@Deprecated
+//TODO Create very complicated and advanced dynamic resource selector
+public class NovelUpdates extends ScrapeFormat {
+    private final String baseURL = "https://www.novelupdates.com";
 
-    public String getNovelPassage(ResponseBody responseBody) throws IOException {
-        Document document = Jsoup.parse(responseBody.string());
+    public NovelUpdates() {
+    }
+
+    public NovelUpdates(Request.Builder builder) {
+        super(builder);
+    }
+
+    public NovelUpdates(OkHttpClient client) {
+        super(client);
+    }
+
+    public NovelUpdates(Request.Builder builder, OkHttpClient client) {
+        super(builder, client);
+    }
+
+    public boolean isIncrementingChapterList() {
+        return false;
+    }
+
+    public String getNovelPassage(String responseBody) throws IOException {
+        Document document = docFromURL(responseBody);
         return null;
     }
 
-    public NovelPage parseNovel(ResponseBody responseBody) throws IOException {
-        Document document = Jsoup.parse(responseBody.string());
+    public NovelPage parseNovel(String URL) throws IOException {
+        Document document = docFromURL(URL);
         Elements chapters = document.select("table").get(1).select("tr");
         for (Element element : chapters) {
             Elements elements = element.select("td");
-            for ()
         }
+        return null;
+    }
+
+    public NovelPage parseNovel(String responseBody, int increment) throws IOException {
         return null;
     }
 
@@ -55,10 +80,9 @@ public class NovelUpdates implements ScrapeFormat {
         else return baseURL;
     }
 
-    public List<Novel> parseLatest(ResponseBody responseBody) throws IOException {
+    public List<Novel> parseLatest(String URL) throws IOException {
         List<Novel> novels = new ArrayList<Novel>();
-
-        Document document = Jsoup.parse(responseBody.string());
+        Document document = docFromURL(URL);
         Elements elements = document.select("table");
         for (int y = 0; y < elements.size(); y++) {
             if (y != 0) {
@@ -67,23 +91,20 @@ public class NovelUpdates implements ScrapeFormat {
                     Elements elements1 = element1.select("a");
                     String title = null;
                     String link = null;
-                    String[] group = null;
                     for (int x = 0; x < elements1.size(); x++) {
                         Element element2 = elements1.get(x);
 
                         if (x == 0) {
                             title = element2.attr("title");
                             link = element2.attr("href");
-                        } else if (x == elements1.size() - 1)
-                            group = new String[]{element2.attr("title"), element2.attr("href")};
+                        }
 
                     }
 
-                    if (title != null && link != null & group != null) {
+                    if (title != null && link != null) {
                         Novel novel = new Novel();
                         novel.link = link;
                         novel.title = title;
-                        novel.group = group;
                         novels.add(novel);
 
                     }
