@@ -1,6 +1,8 @@
 package org.doomsdayrs.api.novelreaderCore.main;
 
 import okhttp3.ResponseBody;
+import org.doomsdayrs.api.novelreaderCore.other.Novel;
+import org.doomsdayrs.api.novelreaderCore.other.NovelPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,6 +10,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,12 +34,18 @@ import java.util.ArrayList;
 public class NovelUpdates implements ScrapeFormat {
     private String baseURL = "https://www.novelupdates.com";
 
-
-    public String getNovelTitle(ResponseBody responseBody) {
+    public String getNovelPassage(ResponseBody responseBody) throws IOException {
+        Document document = Jsoup.parse(responseBody.string());
         return null;
     }
 
-    public String getNovelPassage(ResponseBody responseBody) {
+    public NovelPage parseNovel(ResponseBody responseBody) throws IOException {
+        Document document = Jsoup.parse(responseBody.string());
+        Elements chapters = document.select("table").get(1).select("tr");
+        for (Element element : chapters) {
+            Elements elements = element.select("td");
+            for ()
+        }
         return null;
     }
 
@@ -46,26 +55,41 @@ public class NovelUpdates implements ScrapeFormat {
         else return baseURL;
     }
 
-    public ArrayList<Novel> parseLatest(ResponseBody responseBody) throws IOException {
+    public List<Novel> parseLatest(ResponseBody responseBody) throws IOException {
+        List<Novel> novels = new ArrayList<Novel>();
+
         Document document = Jsoup.parse(responseBody.string());
         Elements elements = document.select("table");
-        for (int y = 0; y<elements.size();y++) {
-            if (y!=0){
-            Element element = elements.get(y);
-            for (Element element1 : element.select("tr")) {
-                Elements elements1 = element1.select("a");
-                String title = null;
-                String link = null;
-                String group = null;
-                for (int x = 0; x<elements1.size();x++) {
-                    switch (x){
-                        case 0:
-                            title = elements1.get(x).attr("title");
+        for (int y = 0; y < elements.size(); y++) {
+            if (y != 0) {
+                Element element = elements.get(y);
+                for (Element element1 : element.select("tr")) {
+                    Elements elements1 = element1.select("a");
+                    String title = null;
+                    String link = null;
+                    String[] group = null;
+                    for (int x = 0; x < elements1.size(); x++) {
+                        Element element2 = elements1.get(x);
+
+                        if (x == 0) {
+                            title = element2.attr("title");
+                            link = element2.attr("href");
+                        } else if (x == elements1.size() - 1)
+                            group = new String[]{element2.attr("title"), element2.attr("href")};
+
                     }
-                    System.out.println(title);
+
+                    if (title != null && link != null & group != null) {
+                        Novel novel = new Novel();
+                        novel.link = link;
+                        novel.title = title;
+                        novel.group = group;
+                        novels.add(novel);
+
+                    }
                 }
-            }}
+            }
         }
-        return null;
+        return novels;
     }
 }

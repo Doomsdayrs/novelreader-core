@@ -3,10 +3,12 @@ package org.doomsdayrs.api.novelreaderCore.main;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
+import org.doomsdayrs.api.novelreaderCore.other.Novel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -44,6 +46,9 @@ public class Core {
         NovelUpdates novelUpdates = new NovelUpdates();
         String url = novelUpdates.getLatestURL(1);
         ResponseBody responseBody = request(url);
-        ArrayList<Novel> novels = novelUpdates.parseLatest(responseBody);
+        List<Novel> novels = novelUpdates.parseLatest(responseBody);
+        System.out.println(novels.get(0).title);
+        responseBody = request(novels.get(0).link);
+        System.out.println(novelUpdates.parseNovel(responseBody));
     }
 }

@@ -1,9 +1,13 @@
 package org.doomsdayrs.api.novelreaderCore.main;
 
 import okhttp3.ResponseBody;
+import org.doomsdayrs.api.novelreaderCore.other.Novel;
+import org.doomsdayrs.api.novelreaderCore.other.NovelChapter;
+import org.doomsdayrs.api.novelreaderCore.other.NovelPage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,13 +31,18 @@ import java.util.ArrayList;
 public interface ScrapeFormat {
 
     /**
-     *
-     * @param responseBody Incoming Novel page to parse
-     * @return The title of the novel
+     * Parse the novel Chapter
+     * @param responseBody Incoming Novel chapter to parse
+     * @return The Passage of the novel
      */
-    String getNovelTitle(ResponseBody responseBody);
-    String getNovelPassage(ResponseBody responseBody);
+    String getNovelPassage(ResponseBody responseBody) throws IOException;
 
+    /**
+     * Parse the novelPage
+     * @param responseBody Incoming Novel page to parse
+     * @return NovelPage object with as many parameters filled as possible;
+     */
+    NovelPage parseNovel(ResponseBody responseBody) throws IOException;
 
     /**
      * If there is a latest page, use this to return a certain page. Starts at 1 onwards
@@ -45,7 +54,7 @@ public interface ScrapeFormat {
     /**
      *
      * @param responseBody LatestPage to be parsed for novels
-     * @return Arraylist of novels listed
+     * @return List of novels listed
      */
-    ArrayList<Novel> parseLatest(ResponseBody responseBody) throws IOException;
+    List<Novel> parseLatest(ResponseBody responseBody) throws IOException;
 }

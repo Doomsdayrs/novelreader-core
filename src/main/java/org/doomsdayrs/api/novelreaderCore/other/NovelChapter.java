@@ -1,4 +1,4 @@
-package org.doomsdayrs.api.novelreaderCore.main;
+package org.doomsdayrs.api.novelreaderCore.other;
 
 
 /**
@@ -20,4 +20,7 @@ package org.doomsdayrs.api.novelreaderCore.main;
  * @author github.com/doomsdayrs
  */
 public class NovelChapter {
+    public String release;
+    public int chapterNum;
+    public String link;
 }

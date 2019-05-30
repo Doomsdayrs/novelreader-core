@@ -1,5 +1,7 @@
-package org.doomsdayrs.api.novelreaderCore.main;
+package org.doomsdayrs.api.novelreaderCore.other;
 
+
+import java.util.Arrays;
 
 /**
  * This file is part of novelreader-core.
@@ -20,13 +22,16 @@ package org.doomsdayrs.api.novelreaderCore.main;
  * @author github.com/doomsdayrs
  */
 public class Novel {
-    public final String title;
-    public final String link;
-    public final String group;
-
-    public Novel(String title, String link, String group) {
-        this.title = title;
-        this.link = link;
-        this.group = group;
+    @Override
+    public String toString() {
+        return "Novel{" +
+                "title='" + title + '\'' +
+                ", link='" + link + '\'' +
+                ", group=" + Arrays.toString(group) +
+                '}';
     }
+
+    public String title;
+    public String link;
+    public String[] group;
 }
