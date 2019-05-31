@@ -1,9 +1,9 @@
 package com.github.Doomsdayrs.api.novelreader_core.main;
 
-import com.github.Doomsdayrs.api.novelreader_core.extensions.en.novel_full.NovelFull;
-import com.github.Doomsdayrs.api.novelreader_core.services.Formatter;
-import com.github.Doomsdayrs.api.novelreader_core.services.Novel;
-import com.github.Doomsdayrs.api.novelreader_core.services.NovelPage;;
+import com.github.Doomsdayrs.api.novelreader_core.extensions.lang.en.novel_full.NovelFull;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.Formatter;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.Novel;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.NovelPage;;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,11 +26,17 @@ import java.util.List;
  * @author github.com/doomsdayrs
  */
 public enum DefaultScrapers implements Formatter {
-    NOVELFULL(new NovelFull());
+    NOVELFULL(new NovelFull(1));
 
     private final Formatter formatter;
+
     DefaultScrapers(Formatter formatter){
         this.formatter = formatter;
+    }
+
+    @Override
+    public int getID() {
+        return formatter.getID();
     }
 
     public boolean isIncrementingChapterList() {

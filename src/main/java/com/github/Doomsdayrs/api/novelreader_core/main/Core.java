@@ -1,8 +1,8 @@
 package com.github.Doomsdayrs.api.novelreader_core.main;
 
-import com.github.Doomsdayrs.api.novelreader_core.services.Formatter;
-import com.github.Doomsdayrs.api.novelreader_core.services.Novel;
-import com.github.Doomsdayrs.api.novelreader_core.services.NovelPage;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.Formatter;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.Novel;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.NovelPage;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,6 @@ import java.util.List;
  * @author github.com/doomsdayrs
  */
 class Core {
-
 
     public static void main(String[] args) throws IOException {
         Formatter scrapeFormat = DefaultScrapers.NOVELFULL;
