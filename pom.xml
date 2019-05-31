@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.Doomsdayrs.api.novelreader-core</groupId>
+    <groupId>com.github.Doomsdayrs.api</groupId>
     <artifactId>novelreader-core</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.0</version>
     <build>
         <plugins>
             <plugin>
@@ -39,4 +39,5 @@
             <version>1.11.3</version>
         </dependency>
     </dependencies>
+
 </project>
