@@ -1,8 +1,8 @@
 package com.github.Doomsdayrs.api.novelreader_core.main;
 
-import com.github.Doomsdayrs.api.novelreader_core.services.core.Formatter;
-import com.github.Doomsdayrs.api.novelreader_core.services.core.Novel;
-import com.github.Doomsdayrs.api.novelreader_core.services.core.NovelPage;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.dep.Formatter;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.Novel;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.NovelPage;
 
 import java.io.IOException;
 import java.util.List;
