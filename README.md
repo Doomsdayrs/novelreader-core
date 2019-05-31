@@ -31,6 +31,12 @@ class Example{
 }
 ```
 
+## To contribute
+### Note, i will be moving extensions to their own seperate repo soon, adding it to this via a submodule. So you will have to move your code a bit.
+- Step 1: Fork the repo
+- Step 2: Name the new scrapeFormat class the name of the site you are scraping, creating a folder if it is more complicated is also acceptable. 
+- Step 3: Once the formatting works (test in the Core class), send a merge request, ill test. Then i will combine it.
+
 ## In Development
 - [X] Search functionality
 - [ ] More sites(Aim is 10 popular ones)
