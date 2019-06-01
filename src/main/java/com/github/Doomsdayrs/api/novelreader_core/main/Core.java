@@ -29,7 +29,6 @@ class Core {
 
     public static void main(String[] args) throws IOException {
         Formatter scrapeFormat = DefaultScrapers.NOVELFULL;
-
         List<Novel> novels = scrapeFormat.search("level");
         NovelPage novelPage = scrapeFormat.parseNovel(novels.get(0).link);
         String passage = scrapeFormat.getNovelPassage(novelPage.novelChapters.get(0).link);

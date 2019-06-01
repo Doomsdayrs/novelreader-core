@@ -1,6 +1,0 @@
-[submodule "src/main/java/com/github/Doomsdayrs/api/novelreader_core/services"]
-	path = src/main/java/com/github/Doomsdayrs/api/novelreader_core/services
-	url = https://github.com/Doomsdayrs/novelreader-services.git
-[submodule "src/main/java/com/github/Doomsdayrs/api/novelreader_core/extensions"]
-	path = src/main/java/com/github/Doomsdayrs/api/novelreader_core/extensions
-	url = https://github.com/Doomsdayrs/novelreader-extensions.git
