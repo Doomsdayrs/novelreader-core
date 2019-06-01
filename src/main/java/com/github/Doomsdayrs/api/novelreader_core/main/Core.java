@@ -32,7 +32,7 @@ class Core {
         List<Novel> novels = scrapeFormat.search("level");
         NovelPage novelPage = scrapeFormat.parseNovel(novels.get(0).link);
         String passage = scrapeFormat.getNovelPassage(novelPage.novelChapters.get(0).link);
-
+        System.out.println(scrapeFormat.getName());
         System.out.println(passage);
     }
 }

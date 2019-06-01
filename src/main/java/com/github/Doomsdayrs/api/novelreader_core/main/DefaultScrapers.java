@@ -41,6 +41,11 @@ public enum DefaultScrapers implements Formatter {
     }
 
     @Override
+    public String getName() {
+        return formatter.getName();
+    }
+
+    @Override
     public String getImageURL() {
         return formatter.getImageURL();
     }
