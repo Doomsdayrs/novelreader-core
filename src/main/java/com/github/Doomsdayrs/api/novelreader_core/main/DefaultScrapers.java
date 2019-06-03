@@ -1,14 +1,13 @@
 package com.github.Doomsdayrs.api.novelreader_core.main;
 
-import com.github.Doomsdayrs.api.novelreader_core.extensions.en.novel_full.NovelFull;
+import com.github.Doomsdayrs.api.novelreader_core.extensions.lang.en.novel_full.NovelFull;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.dep.Formatter;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.Novel;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.NovelPage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
-;
 
 /**
  * This file is part of novelreader-core.
@@ -31,10 +30,24 @@ import java.util.List;
 public enum DefaultScrapers implements Formatter {
     NOVELFULL(new NovelFull(1));
 
+    public static ArrayList<Formatter> formatters = new ArrayList<>();
+    static {
+        formatters.add(NOVELFULL);
+    }
     private final Formatter formatter;
 
     DefaultScrapers(Formatter formatter){
         this.formatter = formatter;
+    }
+
+    @Override
+    public String getName() {
+        return formatter.getName();
+    }
+
+    @Override
+    public String getImageURL() {
+        return formatter.getImageURL();
     }
 
     @Override
