@@ -1,5 +1,6 @@
 package com.github.Doomsdayrs.api.novelreader_core.main;
 
+import com.github.Doomsdayrs.api.novelreader_core.extensions.lang.en.box_novel.BoxNovel;
 import com.github.Doomsdayrs.api.novelreader_core.extensions.lang.en.novel_full.NovelFull;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.dep.Formatter;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.Novel;
@@ -28,15 +29,19 @@ import java.util.List;
  * @author github.com/doomsdayrs
  */
 public enum DefaultScrapers implements Formatter {
-    NOVELFULL(new NovelFull(1));
+    NOVELFULL(new NovelFull(1)),
+    BOXNOVEL(new BoxNovel(2));
 
     public static ArrayList<Formatter> formatters = new ArrayList<>();
+
     static {
         formatters.add(NOVELFULL);
+        formatters.add(BOXNOVEL);
     }
+
     private final Formatter formatter;
 
-    DefaultScrapers(Formatter formatter){
+    DefaultScrapers(Formatter formatter) {
         this.formatter = formatter;
     }
 
@@ -68,7 +73,7 @@ public enum DefaultScrapers implements Formatter {
     }
 
     public NovelPage parseNovel(String URL, int increment) throws IOException {
-        return formatter.parseNovel(URL,increment);
+        return formatter.parseNovel(URL, increment);
     }
 
     public String getLatestURL(int page) {
