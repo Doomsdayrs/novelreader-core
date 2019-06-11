@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/Doomsdayrs/novelreader-core.svg)](https://jitpack.io/#Doomsdayrs/novelreader-core)
 # novelreader-core
 Core API for novel reader
 
