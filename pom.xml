@@ -6,7 +6,7 @@
 
     <groupId>com.github.Doomsdayrs.api</groupId>
     <artifactId>novelreader-core</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <build>
         <plugins>
             <plugin>
@@ -49,13 +49,13 @@
         <dependency>
             <groupId>com.github.Doomsdayrs</groupId>
             <artifactId>novelreader-extensions</artifactId>
-            <version>1.0.8</version>
+            <version>v1.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.Doomsdayrs</groupId>
             <artifactId>novelreader-services</artifactId>
-            <version>v1.0.7</version>
+            <version>v1.0.9</version>
         </dependency>
 
     </dependencies>

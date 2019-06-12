@@ -4,6 +4,7 @@ import com.github.Doomsdayrs.api.novelreader_core.extensions.lang.en.box_novel.B
 import com.github.Doomsdayrs.api.novelreader_core.extensions.lang.en.novel_full.NovelFull;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.dep.Formatter;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.Novel;
+import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.NovelGenre;
 import com.github.Doomsdayrs.api.novelreader_core.services.core.objects.NovelPage;
 
 import java.io.IOException;
@@ -60,6 +61,16 @@ public enum DefaultScrapers implements Formatter {
         return formatter.getID();
     }
 
+    @Override
+    public boolean hasSearch() {
+        return formatter.hasSearch();
+    }
+
+    @Override
+    public boolean hasGenres() {
+        return formatter.hasGenres();
+    }
+
     public boolean isIncrementingChapterList() {
         return formatter.isIncrementingChapterList();
     }
@@ -87,5 +98,10 @@ public enum DefaultScrapers implements Formatter {
     @Override
     public List<Novel> search(String query) throws IOException {
         return formatter.search(query);
+    }
+
+    @Override
+    public NovelGenre[] getGenres() {
+        return formatter.getGenres();
     }
 }
